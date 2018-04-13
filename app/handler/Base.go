@@ -3,24 +3,30 @@ package handler
 import (
 	"net/http"
 	"github.com/bienkma/SentAndRecivedMsgQueue/app/view"
+	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
 type BaseHandler struct {
-	w http.ResponseWriter
-	r *http.Request
+	response http.ResponseWriter
+	request *http.Request
+}
+
+type NewKafka struct {
+	NewProducer *kafka.Producer
+	NewConsumer *kafka.Consumer
 }
 
 type HandleFunc func(ctx BaseHandler) view.ApiResponse
 
-func GetBaseHandler(w http.ResponseWriter, r *http.Request) BaseHandler {
-	return BaseHandler{w, r}
+func GetBaseHandler(response http.ResponseWriter, request *http.Request) BaseHandler {
+	return BaseHandler{response, request}
 }
 
 
 func MakeHandler(handlerFunc HandleFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		h := GetBaseHandler(w, r)
+	return func(response http.ResponseWriter, request *http.Request) {
+		h := GetBaseHandler(response, request)
 		res := handlerFunc(h)
-		view.RenderJson(w, res)
+		view.RenderJson(response, res)
 	}
 }

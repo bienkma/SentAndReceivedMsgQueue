@@ -1,26 +1,24 @@
 package handler
 
 import (
-	"net/http"
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/view"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/config"
+	"github.com/bienkma/SentAndRecivedMsgQueue/app/view"
+	"net/http"
 )
 
-func store2Kafka(p *kafka.Producer, topic string, msg []byte) error{
-	return p.Produce(&kafka.Message{
-		TopicPartition: kafka.TopicPartition{Topic: &topic, Partition:kafka.PartitionAny},
-		Value: msg,
-	}, nil)
-}
-
-func Sender(ctx BaseHandler) view.ApiResponse {
-	ctx.r.ParseForm()
-	msg := ctx.r.FormValue("msg")
-	topic := ctx.r.FormValue("topic")
-	p := kafka.Producer{&kafka.ConfigMap{"bootstrap.servers": config.AppConfig().QueueKafkaURL}}
-	if err:= store2Kafka(p, topic, []byte(msg)); err != nil{
-		return view.ApiResponse{Code: http.StatusOK, Data: "sent"}
+func (kk *NewKafka) Sender(ctx BaseHandler) view.ApiResponse {
+	ctx.request.ParseForm()
+	topic := ctx.request.Form.Get("topic")
+	msg := ctx.request.Form.Get("msg")
+	if topic != "" && msg != "" {
+		err := kk.NewProducer.Produce(&kafka.Message{
+			TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
+			Value:          []byte(msg),
+		}, nil)
+		if err != nil {
+			return view.ApiResponse{Code: http.StatusBadRequest, Data: "Not sent"}
+		}
+		return view.ApiResponse{Code: http.StatusOK, Data: "sent: " + msg + " to channel: " + topic}
 	}
 	return view.ApiResponse{Code: http.StatusBadRequest, Data: "Not sent"}
 }

@@ -1,8 +1,8 @@
 package config
 
-import "encoding/json"
 import (
 	"os"
+	"encoding/json"
 )
 
 type Configuration struct {
