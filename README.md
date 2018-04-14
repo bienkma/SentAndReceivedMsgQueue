@@ -12,4 +12,4 @@ user UI → app → Queue(kafka) → app → user UI
 <img src="https://raw.githubusercontent.com/bienkma/SentAndRecivedMsgQueue/master/screen/sender.png"/>
 
 - Receiver
-<img src="https://raw.githubusercontent.com/bienkma/SentAndRecivedMsgQueue/master/screen/reciever.png"/>
+<img src="https://raw.githubusercontent.com/bienkma/SentAndRecivedMsgQueue/master/screen/receiver.png"/>
