@@ -1,23 +1,26 @@
-FROM ubuntu:16.04
-MAINTAINER bienkma (bientd88@gmail.com)
-RUN mkdir -p $home/go/src
-RUN \
-  apt-get update && \
-  apt-get install -y --no-install-recommends build-essential libfuse-dev libcurl4-openssl-dev automake libtool pkg-config libssl-dev wget tar git && \
-  apt-get clean && \
-  apt-get autoremove -y && \
-  rm -rf /var/lib/{apt,dpkg,cache,log}/
+FROM golang:1.10.1
 
-RUN \
-  export GOROOT='/usr/local/go' && \
-  export GOPATH=`$home/go` && \
-  mkdir /etc/app/
+WORKDIR /go/src/app
+
+RUN mkdir -p /etc/app
 
 COPY app.json /etc/app/app.json
 
-RUN cd /tmp/ && \
-    git clone https://github.com/bienkma/SentAndRecivedMsgQueue.git /tmp/SentAndReceivedMsgQueue && \
-    cd /tmp/SentAndReceivedMsgQueue
+RUN apt-get install git
+
+RUN \
+    git clone https://github.com/edenhill/librdkafka.git /tmp/librdkafka && \
+    cd /tmp/librdkafka && \
+    ./configure && \
+    make -j 8 && \
+    make install && \
+    ldconfig
+
+RUN \
+    git clone https://github.com/bienkma/SentAndRecivedMsgQueue.git /go/src/SentAndReceivedMsgQueue
+
+EXPOSE 8080:8080
+CMD ["app"]
 
 
 

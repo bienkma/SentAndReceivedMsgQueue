@@ -12,8 +12,8 @@ type Configuration struct {
 }
 
 func AppConfig() Configuration {
-	//file, ok := os.Open("/etc/app/app.json")
-	file, ok := os.Open("app/config/app.json")
+	file, ok := os.Open("/etc/app/app.json")
+	//file, ok := os.Open("app/config/app.json")
 	defer file.Close()
 
 	if ok != nil {
