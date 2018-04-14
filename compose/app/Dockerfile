@@ -2,10 +2,6 @@ FROM golang:1.10.1
 
 WORKDIR /go/src/app
 
-RUN mkdir -p /etc/app
-
-COPY app.json /etc/app/app.json
-
 RUN apt-get install git
 
 RUN \
@@ -17,21 +13,11 @@ RUN \
     ldconfig
 
 RUN \
-    git clone https://github.com/bienkma/SentAndRecivedMsgQueue.git /go/src/SentAndReceivedMsgQueue
+    git clone https://github.com/bienkma/SentAndRecivedMsgQueue.git /go/src/app/SentAndReceivedMsgQueue && \
+    cd /go/src/app/SentAndReceivedMsgQueue/app && \
+    go get -v -d . && \
+    go install
+COPY start.sh /bin/start.sh
+RUN chmod 755 /bin/start.sh
 
-EXPOSE 8080:8080
-CMD ["app"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CMD ["/bin/start.sh"]
