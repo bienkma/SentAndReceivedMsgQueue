@@ -1,9 +1,6 @@
 package config
 
-import (
-	"os"
-	"encoding/json"
-)
+import "os"
 
 type Configuration struct {
 	HostName string
@@ -12,19 +9,9 @@ type Configuration struct {
 }
 
 func AppConfig() Configuration {
-	file, ok := os.Open("/etc/app/app.json")
-	//file, ok := os.Open("app/config/app.json")
-	defer file.Close()
-
-	if ok != nil {
-		panic("Can't open config file: app.json")
+	return Configuration{
+		HostName: os.Getenv("APP_BIND_IP"),
+		Port: os.Getenv("8080"),
+		QueueKafkaURL: os.Getenv("BROKER_LIST_URL"),
 	}
-
-	decoder := json.NewDecoder(file)
-	cfg := Configuration{}
-
-	if ok := decoder.Decode(&cfg); ok != nil {
-		panic(ok)
-	}
-	return cfg
 }
