@@ -9,7 +9,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 )
 
-// Logging for API pattern. Code reference https://github.com/go-chi/chi/blob/master/_examples/logging/main.go
+// Logging for API pattern. Status reference https://github.com/go-chi/chi/blob/master/_examples/logging/main.go
 func NewStructuredLogger(logger *logrus.Logger) func(next http.Handler) http.Handler {
 	return middleware.RequestLogger(&StructuredLogger{logger})
 }

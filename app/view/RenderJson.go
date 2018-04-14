@@ -11,9 +11,9 @@ func RenderJson(w http.ResponseWriter, res ApiResponse) {
 	for key, value := range res.Headers {
 		w.Header().Set(key, value)
 	}
-	w.WriteHeader(res.Code)
+	w.WriteHeader(res.Status)
 
-	if res.Code == http.StatusNoContent {
+	if res.Status == http.StatusNoContent {
 		return
 	}
 

@@ -25,7 +25,7 @@ func main() {
 
 	consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": cfg.QueueKafkaURL,
-		"group.id":          "emtapto",
+		"group.id":          "FixForDev",
 		"auto.offset.reset": "earliest",
 	})
 

@@ -16,9 +16,9 @@ func (kk *NewKafka) Sender(ctx BaseHandler) view.ApiResponse {
 			Value:          []byte(msg),
 		}, nil)
 		if err != nil {
-			return view.ApiResponse{Code: http.StatusBadRequest, Data: "Not sent"}
+			return view.ApiResponse{Status: http.StatusBadRequest, Msg: "Not sent"}
 		}
-		return view.ApiResponse{Code: http.StatusOK, Data: "sent: " + msg + " to channel: " + topic}
+		return view.ApiResponse{Status: http.StatusOK, Msg: "sent: " + msg + " to channel: " + topic}
 	}
-	return view.ApiResponse{Code: http.StatusBadRequest, Data: "Not sent"}
+	return view.ApiResponse{Status: http.StatusBadRequest, Msg: "Not sent"}
 }
