@@ -5,9 +5,9 @@ import (
 	"github.com/go-chi/chi"
 	chiMiddleware "github.com/go-chi/chi/middleware"
 
-	myMiddleware "github.com/bienkma/SentAndRecivedMsgQueue/app/router/middleware"
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/handler"
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/log"
+	myMiddleware "github.com/bienkma/SentAndReceivedMsgQueue/app/router/middleware"
+	"github.com/bienkma/SentAndReceivedMsgQueue/app/handler"
+	"github.com/bienkma/SentAndReceivedMsgQueue/app/log"
 	"time"
 )
 

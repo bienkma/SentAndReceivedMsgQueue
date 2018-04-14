@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"github.com/go-chi/chi"
 
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/config"
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/router"
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/handler"
+	"github.com/bienkma/SentAndReceivedMsgQueue/app/config"
+	"github.com/bienkma/SentAndReceivedMsgQueue/app/router"
+	"github.com/bienkma/SentAndReceivedMsgQueue/app/handler"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
 

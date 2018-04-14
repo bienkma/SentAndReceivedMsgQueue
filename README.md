@@ -9,7 +9,7 @@ user UI → app → Queue(kafka) → app → user UI
 
 <b>Screen:</b>
 - Sender
-<img src="https://raw.githubusercontent.com/bienkma/SentAndRecivedMsgQueue/master/screen/sender.png"/>
+<img src="https://raw.githubusercontent.com/bienkma/SentAndReceivedMsgQueue/master/screen/sender.png"/>
 
 - Receiver
-<img src="https://raw.githubusercontent.com/bienkma/SentAndRecivedMsgQueue/master/screen/receiver.png"/>
+<img src="https://raw.githubusercontent.com/bienkma/SentAndReceivedMsgQueue/master/screen/receiver.png"/>

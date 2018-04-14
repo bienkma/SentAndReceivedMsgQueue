@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/view"
+	"github.com/bienkma/SentAndReceivedMsgQueue/app/view"
 	"net/http"
 )
 

@@ -2,7 +2,7 @@ package handler
 
 import (
 	"net/http"
-	"github.com/bienkma/SentAndRecivedMsgQueue/app/view"
+	"github.com/bienkma/SentAndReceivedMsgQueue/app/view"
 )
 
 // Intro About me. So it's not necessary BaseHandler

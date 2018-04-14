@@ -10,13 +10,14 @@ RUN \
 
 RUN \
   export GOROOT='/usr/local/go' && \
-  export GOPATH=`$home/go`
+  export GOPATH=`$home/go` && \
+  mkdir /etc/app/
 
-COPY received/ recevied
-RUN \
-    cd recevied && \
-    go get all
-    go build -o recevied recevied.go
+COPY app.json /etc/app/app.json
+
+RUN cd /tmp/ && \
+    git clone https://github.com/bienkma/SentAndRecivedMsgQueue.git /tmp/SentAndReceivedMsgQueue && \
+    cd /tmp/SentAndReceivedMsgQueue
 
 
 
