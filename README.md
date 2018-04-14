@@ -8,8 +8,8 @@ user UI → app → Queue(kafka) → app → user UI
 - Write Ansible modules to build and deploy this app to server (you can use your local host).
 
 <b>Screen:</b>
-- Sender</p>
+- Sender
 <img src="https://raw.githubusercontent.com/bienkma/SentAndRecivedMsgQueue/master/screen/sender.png"/>
 
-- Receiver</p>
+- Receiver
 <img src="https://raw.githubusercontent.com/bienkma/SentAndRecivedMsgQueue/master/screen/reciever.png"/>
