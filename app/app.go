@@ -39,9 +39,9 @@ func main() {
 	}
 
 	router.Register(r, p)
-	log.Printf("Start listening on %s:%s", cfg.HostName, cfg.Port)
+	log.Printf("Start listening on 0.0.0.0:%s", cfg.Port)
 
-	if err := http.ListenAndServe(fmt.Sprintf("%s:%s", cfg.HostName, cfg.Port), r); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", cfg.Port), r); err != nil {
 		panic(err)
 	}
 }
