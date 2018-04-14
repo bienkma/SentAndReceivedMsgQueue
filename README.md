@@ -7,3 +7,9 @@ user UI → app → Queue(kafka) → app → user UI
 - You can write in any programing language.
 - Write Ansible modules to build and deploy this app to server (you can use your local host).
 
+<b>Screen</b>
+Inline-style:
+![alt text](https://github.com/bienkma/SentAndRecivedMsgQueue/tree/master/screen/sender.png "Sender")
+
+Inline-style:
+![alt text](https://github.com/bienkma/SentAndRecivedMsgQueue/tree/master/screen/receiver.png "Receiver")

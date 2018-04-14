@@ -43,7 +43,7 @@ func receiver(url string)  {
 	var content map[string]interface{}
 	json.Unmarshal(body, &content)
 	if content["Status"] == 200.0{
-		fmt.Println("$Reciever->",content["Msg"])
+		fmt.Println("$Receiver->",content["Msg"])
 	}
 	time.Sleep(3)
 }
@@ -61,7 +61,7 @@ func menu() {
 	fmt.Println("MENU")
 	fmt.Println("----")
 	fmt.Println("1. Choice s for sender mode")
-	fmt.Println("2. Choice r for reciever mode")
+	fmt.Println("2. Choice r for receiver mode")
 	fmt.Println("3. Choice q for exit program")
 }
 
@@ -99,7 +99,7 @@ func main() {
 				sender(apiSenderUrl, topic, scan.Text())
 			}
 		case "r":
-			fmt.Print("$reciever->")
+			fmt.Print("$receiver->")
 			for {
 				receiver(apiReceiverUrl)
 			}
