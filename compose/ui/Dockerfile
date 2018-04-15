@@ -12,8 +12,4 @@ RUN \
     cp /go/bin/ui /go/src/app/ui && \
     rm -rf /go/src/app/SentAndReceivedMsgQueue
 
-#ENV TOPIC=roomchat
-#ENV API_SENDER_URL=http://192.168.1.74:8080/apis/sender
-#ENV API_RECEIVER_URL=http://192.168.1.74:8080/apis/receiver?topic=roomchat
-
 CMD ["ui"]

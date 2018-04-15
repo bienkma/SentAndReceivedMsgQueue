@@ -1,12 +1,37 @@
 ---
-# tasks file for ansible-dockerized-
-- name: kafka
+# task deploy app, ui, queue kafka
+- name: app
   hosts: 127.0.0.1
   user: root
   gather_facts: no
   vars:
-    IP_HOST: "192.168.1.47" # IP address will be run the app, note: don't use 127.0.0.1
+    IP_HOST: "192.168.1.74" # IP address will be run the app, note: don't use 127.0.0.1
   tasks:
+    - name: Install docker compose
+      apt:
+        name: docker-compose
+        state: latest
+
+    - name: Install git
+      apt:
+        name: git
+        state: latest
+
+    - name: git clone source code project for build ui and app image docker
+      shell: |
+        rm -rf /tmp/SentAndReceivedMsgQueue/
+        git clone https://github.com/bienkma/SentAndReceivedMsgQueue.git /tmp/SentAndReceivedMsgQueue
+
+    - name: build ui image docker
+      shell: |
+        cd /tmp/SentAndReceivedMsgQueue/compose/ui
+        docker build -t ui .
+
+    - name: build app image docker
+      shell: |
+        cd /tmp/SentAndReceivedMsgQueue/compose/app
+        docker build -t app .
+
     - docker_service:
         project_name: app
         definition:
@@ -18,8 +43,7 @@
                - "2181:2181"
 
             kafka:
-             image: wurstmeister/kafka:0.11.4
-             #image: wurstmeister/kafka:0.10.2.0-1
+             image: wurstmeister/kafka:0.11.0.1
              ports:
                - "9092:9092"
              environment:
