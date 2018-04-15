@@ -28,6 +28,9 @@ func main() {
 		"bootstrap.servers": cfg.QueueKafkaURL,
 		"group.id":          "FixForDev",
 		"auto.offset.reset": "earliest",
+		"session.timeout.ms":              1000,
+		"go.events.channel.enable":        true,
+		"go.application.rebalance.enable": true,
 	})
 	if err != nil {
 		panic(err)
