@@ -13,7 +13,7 @@ func (kk *NewKafka) Reciver(ctx BaseHandler) view.ApiResponse {
 			return view.ApiResponse{Status: http.StatusBadRequest, Msg: "Not msg"}
 		}
 		defer kk.NewConsumer.Close()
-		msg, err := kk.NewConsumer.ReadMessage(-1)
+		msg, err := kk.NewConsumer.ReadMessage(0.5)
 		if err == nil {
 			return view.ApiResponse{Status: http.StatusOK, Msg: string(msg.Value)}
 		}
