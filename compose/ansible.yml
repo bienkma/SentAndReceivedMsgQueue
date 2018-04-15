@@ -1,0 +1,46 @@
+---
+# tasks file for ansible-dockerized-
+- name: kafka
+  hosts: 127.0.0.1
+  user: root
+  gather_facts: no
+  tasks:
+    - docker_service:
+        project_name: app
+        definition:
+          version: '2'
+          services:
+            zookeeper:
+             image: wurstmeister/zookeeper
+             ports:
+               - "2181:2181"
+
+            kafka:
+             image: wurstmeister/kafka
+             #image: wurstmeister/kafka:0.10.2.0-1
+             ports:
+               - "9092:9092"
+             environment:
+               KAFKA_ADVERTISED_HOST_NAME: "192.168.1.74"
+               KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+               KAFKA_LOG_DIRS: "/kafka/logs"
+             volumes:
+               - "/var/run/docker.sock:/var/run/docker.sock"
+             depends_on:
+               - zookeeper
+            app:
+              image: app
+              ports:
+                - "8080:8080"
+              environment:
+                API_BIND_PORT: 8080
+                BROKER_LIST_URL: 192.168.1.74:9092
+            ui:
+              image: ui
+              environment:
+                TOPIC: roomchat
+                API_SENDER_URL: http://192.168.1.74:8080/apis/sender
+                API_RECEIVER_URL: http://192.168.1.74:8080/apis/receiver?topic=roomchat
+      register: output
+    - debug:
+        var: output

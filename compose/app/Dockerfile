@@ -7,6 +7,7 @@ RUN apt-get install git
 RUN \
     git clone https://github.com/edenhill/librdkafka.git /tmp/librdkafka && \
     cd /tmp/librdkafka && \
+    git checkout tags/v0.11.4 && \
     ./configure && \
     make -j 8 && \
     make install && \

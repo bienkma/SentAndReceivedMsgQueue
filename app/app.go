@@ -21,6 +21,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer producer.Close()
 
 
 	consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
@@ -28,10 +29,10 @@ func main() {
 		"group.id":          "FixForDev",
 		"auto.offset.reset": "earliest",
 	})
-
 	if err != nil {
 		panic(err)
 	}
+	defer consumer.Close()
 
 	p := handler.NewKafka{
 		producer,
