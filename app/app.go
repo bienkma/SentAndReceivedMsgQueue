@@ -27,7 +27,7 @@ func main() {
 	consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": cfg.QueueKafkaURL,
 		"group.id":          "FixForDev",
-		"auto.offset.reset": "latest",
+		"auto.offset.reset": "latest", // Not show history chat, set to earliest if you want display history chat
 	})
 	if err != nil {
 		panic(err)
